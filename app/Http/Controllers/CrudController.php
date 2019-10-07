@@ -82,9 +82,11 @@ class CrudController extends Controller
      * @param  \App\Crud  $crud
      * @return \Illuminate\Http\Response
      */
-    public function show(Crud $crud)
-    {
-        //
+    public function show($id, Crud $crud)
+    {   
+        $crud = Crud::find($id);
+        
+        return view('crud.show', compact('crud'));
     }
 
     /**
@@ -93,9 +95,11 @@ class CrudController extends Controller
      * @param  \App\Crud  $crud
      * @return \Illuminate\Http\Response
      */
-    public function edit(Crud $crud)
+    public function edit($id, Crud $crud)
     {
-        //
+        $crud = Crud::find($id);
+
+        return view('crud.show', compact('crud'));
     }
 
     /**
@@ -120,6 +124,7 @@ class CrudController extends Controller
     {
         //
     }
+<<<<<<< HEAD
     public function toexport(){
         $data = array('q1'=>'Combination of Drawings/Shareholder salary(i.e none paye income and PAYE)', 'q2'=>'YES');
         $pdf = PDF::loadView('pdfView', compact('data'));
@@ -127,4 +132,18 @@ class CrudController extends Controller
         return $pdf->download('invoice.pdf');
     }
 
+=======
+
+    public function get_data_for_display()
+    {   
+        $data = Crud::all();
+        return $data;
+    }
+
+    public function delete($id)
+    {
+        $crud = Crud::find($id);
+        $crud->delete();
+    }
+>>>>>>> ea52812c3ff1fffa3d10dc4b0dfb7acdd1bfa8da
 }
