@@ -20,7 +20,7 @@ class CreateCrudsTable extends Migration
             $table->string('pay_draw');
             $table->boolean('three_years_in_business');
             $table->integer('years');
-            $table->boolean('fulltime');
+            $table->string('fulltime');
             $table->integer('staff_count');
             $table->boolean('on_tool');
             $table->boolean('share_dir_on_tool');

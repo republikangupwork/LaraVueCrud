@@ -22,5 +22,5 @@ Route::group(['prefix'=>'crud'], function () {
 	});
     Route::get('/dashboard', 'CrudController@index');
     Route::get('/create', 'CrudController@create');
-    // Route::post('/store', 'CrudController@store');
+    Route::post('/store', 'CrudController@store');
 });

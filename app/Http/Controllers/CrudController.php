@@ -35,7 +35,40 @@ class CrudController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'                      => 'required|string',
+            'email'                     => 'required|email',
+            'pay_draw'                  => 'required',
+            'three_years_in_business'   => 'required',
+            'years'                     => 'required|integer',
+            'fulltime'                  => 'required',
+            'staff_count'               => 'required|integer',
+            'on_tool'                   => 'required',
+            'share_dir_on_tool'         => 'required',
+            'take_out_money'            => 'required|integer',
+            'pay_freq'                  => 'required',
+            'acc_cover'                 => 'required',
+            'cover_plus_extra_amt'      => 'required|integer',
+        ]);
+        
+        $crud = new Crud;
+        $crud->name = $request['name'];
+        $crud->email = $request['email'];
+        $crud->pay_draw = $request['pay_draw'];
+        $crud->three_years_in_business = $request['three_years_in_business'];
+        $crud->years = $request['years'];
+        $crud->fulltime = $request['fulltime'];
+        $crud->staff_count = $request['staff_count'];
+        $crud->on_tool = $request['on_tool'];
+        $crud->share_dir_on_tool = $request['share_dir_on_tool'];
+        $crud->take_out_money = $request['take_out_money'];
+        $crud->pay_freq = $request['pay_freq'];
+        $crud->acc_cover = $request['acc_cover'];
+        $crud->cover_plus_extra_amt = $request['name'];
+
+        $crud->save();
+
+        return response()->json(null, 200);
     }
 
     /**
