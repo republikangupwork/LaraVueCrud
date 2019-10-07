@@ -1867,9 +1867,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
+  },
+  data: function data() {
+    return {
+      loading: false,
+      data: null,
+      error: null
+    };
+  },
+  created: function created() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      this.error = this.data = null;
+      this.loading = true;
+      axios.post('/crud/get_data').then(function (response) {
+        if (response['data'].length > 0) {
+          _this.loading = false;
+          _this.data = response['data'];
+        }
+      });
+    },
+    methodA: function methodA() {
+      alert('gg');
+    },
+    deleteRow: function deleteRow(id) {
+      var self = this;
+      axios["delete"]('/crud/delete/' + id).then(function (response) {
+        // console.log(response);
+        self.fetchData();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -37324,61 +37366,100 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "col-md-10" }, [
+    _c(
+      "div",
+      { staticClass: "container", staticStyle: { "margin-top": "20px" } },
+      [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header bg-primary text-white" }, [
+            _vm._v("DASHBOARD")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _vm.loading
+              ? _c("div", { staticClass: "loading" }, [
+                  _vm._v(
+                    "\n                    No Data Available...\n                "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.data
+              ? _c(
+                  "table",
+                  { staticClass: "table table-striped table-bordered" },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.data, function(data) {
+                        return _c("tr", [
+                          _c("td", [_c("p", [_vm._v(_vm._s(data.name))])]),
+                          _vm._v(" "),
+                          _c("td", [_c("p", [_vm._v(_vm._s(data.email))])]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-success",
+                                attrs: { href: "/crud/show/" + data.id }
+                              },
+                              [_vm._v("Show")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { href: "/crud/edit/" + data.id }
+                              },
+                              [_vm._v("Edit")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { href: "" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.deleteRow(data.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Delete")]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
+              : _vm._e()
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-10" }, [
-      _c(
-        "div",
-        { staticClass: "container", staticStyle: { "margin-top": "20px" } },
-        [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header bg-primary text-white" }, [
-              _vm._v("DASHBOARD")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c(
-                "table",
-                { staticClass: "table table-striped table-bordered" },
-                [
-                  _c("thead", [
-                    _c("th", [_vm._v("Name")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Email")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Action")])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("td", [_vm._v("Cardo")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("cardo@example.com")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("button", { staticClass: "btn btn-primary" }, [
-                        _vm._v("Edit")
-                      ]),
-                      _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-info text-white" }, [
-                        _vm._v("Generate pdf")
-                      ]),
-                      _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-danger" }, [
-                        _vm._v("Delete")
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]
-      )
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Action")])
+      ])
     ])
   }
 ]

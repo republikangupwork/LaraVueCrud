@@ -5,20 +5,27 @@
                 <div class="card-header bg-primary text-white">DASHBOARD</div>
 
                 <div class="card-body">
-                    <table class="table table-striped table-bordered">
+                    <div class="loading" v-if="loading">
+                        No Data Available...
+                    </div>
+                    <table class="table table-striped table-bordered" v-if="data">
                         <thead>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Action</th>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <td>Cardo</td>
-                            <td>cardo@example.com</td>
-                            <td>
-                                <button class="btn btn-primary">Edit</button>
-                                <button class="btn btn-info text-white">Generate pdf</button>
-                                <button class="btn btn-danger">Delete</button>
-                            </td>
+                            <tr v-for="data in data">
+                                <td><p>{{ data.name }}</p></td>
+                                <td><p>{{ data.email }}</p></td>
+                                <td>
+                                    <a :href="'/crud/show/'+ data.id"" class="btn btn-success">Show</a>
+                                    <a :href="'/crud/edit/'+ data.id"" class="btn btn-primary">Edit</a>
+                                    <a href="" @click.prevent="deleteRow(data.id)" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -30,7 +37,45 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
+        },
+        data() {
+            return {
+                loading: false,
+                data: null,
+                error: null,
+            };
+        },
+        created() {
+            this.fetchData();
+        },
+        methods: {
+            fetchData() {
+                this.error = this.data = null;
+                this.loading = true;
+                axios
+                    .post('/crud/get_data')
+                    .then(response => {
+                        if (response['data'].length > 0) {
+                            this.loading = false;
+                            this.data = response['data'];
+                        }
+                    });
+            },
+            methodA() {
+                alert('gg')
+            },
+            deleteRow: function(id) {
+                var self = this;
+                axios.delete('/crud/delete/'+id)
+                    .then(function (response) {
+                        // console.log(response);
+                        self.fetchData()
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
     }
 </script>

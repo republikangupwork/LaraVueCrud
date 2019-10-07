@@ -77,9 +77,9 @@ class CrudController extends Controller
      * @param  \App\Crud  $crud
      * @return \Illuminate\Http\Response
      */
-    public function show(Crud $crud)
-    {
-        //
+    public function show($id, Crud $crud)
+    {   
+        return view('crud.show');
     }
 
     /**
@@ -88,9 +88,9 @@ class CrudController extends Controller
      * @param  \App\Crud  $crud
      * @return \Illuminate\Http\Response
      */
-    public function edit(Crud $crud)
+    public function edit($id, Crud $crud)
     {
-        //
+        return view('crud.show');
     }
 
     /**
@@ -114,5 +114,17 @@ class CrudController extends Controller
     public function destroy(Crud $crud)
     {
         //
+    }
+
+    public function get_data_for_display()
+    {   
+        $data = Crud::all();
+        return $data;
+    }
+
+    public function delete($id)
+    {
+        $crud = Crud::find($id);
+        $crud->delete();
     }
 }
