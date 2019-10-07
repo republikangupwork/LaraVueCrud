@@ -12,12 +12,15 @@
 */
 
 Route::get('/', function () {
-    return redirect('home');
+    return redirect('crud/dashboard');
 });
 
-Route::get('/home', 'CrudController@index');
-Route::get('/create', 'CrudController@create');
-Route::post('/store', 'CrudController@store');
-Route::get('/show', 'CrudController@show');
-Route::get('/edit', 'CrudController@edit');
-Route::post('/update', 'CrudController@update');
+
+Route::group(['prefix'=>'crud'], function () {
+	Route::get('/', function () {
+	    return redirect('crud/dashboard');
+	});
+    Route::get('/dashboard', 'CrudController@index');
+    Route::get('/create', 'CrudController@create');
+    // Route::post('/store', 'CrudController@store');
+});

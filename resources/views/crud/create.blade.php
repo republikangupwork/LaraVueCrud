@@ -1,5 +1,5 @@
 @extends('crud.layouts.app')
 
 @section('content')
-	<crud-component></crud-component>
+	<crud-create-page></crud-create-page>
 @endsection

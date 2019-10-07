@@ -46,7 +46,7 @@ class CrudController extends Controller
      */
     public function show(Crud $crud)
     {
-        return view('crud.show');
+        //
     }
 
     /**
@@ -57,7 +57,7 @@ class CrudController extends Controller
      */
     public function edit(Crud $crud)
     {
-        return view('crud.edit');
+        //
     }
 
     /**
