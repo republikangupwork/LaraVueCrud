@@ -23,4 +23,15 @@ Route::group(['prefix'=>'crud'], function () {
     Route::get('/dashboard', 'CrudController@index');
     Route::get('/create', 'CrudController@create');
     Route::post('/store', 'CrudController@store');
+    Route::get('/export', 'CrudController@toexport');
+
+    
 });
+
+// Route::get('/export', function(){
+// 	$pdf = App::make('dompdf.wrapper');
+// 	// $pdf->loadHTML('<h1>Test</h1>');
+// 	// return $pdf->stream();
+//     	  	$pdf = PDF::loadView('crud/create');
+//         	return $pdf->download('create.pdf');
+//     });

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Crud;
 use Illuminate\Http\Request;
+use PDF;
+use App;
+
 
 class CrudController extends Controller
 {
@@ -25,6 +28,8 @@ class CrudController extends Controller
     public function create()
     {
         return view('crud.create');
+      
+
     }
 
     /**
@@ -115,4 +120,13 @@ class CrudController extends Controller
     {
         //
     }
+    public function toexport(){
+
+        // $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadHTML('<h1>Test</h1>');
+        // return $pdf->stream();
+        $pdf = PDF::loadView('crud/create');
+         return $pdf->download('create.pdf');
+    }
+
 }
