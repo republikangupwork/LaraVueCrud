@@ -23,6 +23,8 @@ window.Vue = require('vue');
 Vue.component('crud-component', require('./components/CrudComponent.vue').default);
 Vue.component('sidebar', require('./components/Sidebar.vue').default);
 Vue.component('crud-create-page', require('./components/CrudCreatePage.vue').default);
+Vue.component('crud-show-page', require('./components/CrudShowPage.vue').default);
+Vue.component('crud-edit-page', require('./components/CrudEditPage.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

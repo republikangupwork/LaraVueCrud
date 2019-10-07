@@ -62,9 +62,6 @@
                         }
                     });
             },
-            methodA() {
-                alert('gg')
-            },
             deleteRow: function(id) {
                 var self = this;
                 axios.delete('/crud/delete/'+id)

@@ -1,5 +1,5 @@
 @extends('crud.layouts.app')
 
 @section('content')
-	<crud-show-page></crud-show-page>
+	<crud-edit-page></crud-edit-page>
 @endsection

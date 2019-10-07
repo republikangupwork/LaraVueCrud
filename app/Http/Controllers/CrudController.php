@@ -79,7 +79,9 @@ class CrudController extends Controller
      */
     public function show($id, Crud $crud)
     {   
-        return view('crud.show');
+        $crud = Crud::find($id);
+        
+        return view('crud.show', compact('crud'));
     }
 
     /**
@@ -90,7 +92,9 @@ class CrudController extends Controller
      */
     public function edit($id, Crud $crud)
     {
-        return view('crud.show');
+        $crud = Crud::find($id);
+
+        return view('crud.show', compact('crud'));
     }
 
     /**
