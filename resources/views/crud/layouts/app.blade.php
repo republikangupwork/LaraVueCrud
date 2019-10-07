@@ -28,13 +28,28 @@
 		        </div>
 		    </div>
 	        @yield('content')
+	        <button id="cmd" class="btn btn-default">Generate PDF</button>
         </div>
   	</div>
 	
 
 	<script src="{{ mix('js/app.js') }}"></script>
+	<script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
     @if(config('app.env') == 'local')
 	    <script src="http://localhost:35729/livereload.js"></script>
 	@endif
 </body>
 </html>
+
+<script>
+		    var doc = new jsPDF();
+
+    $('#cmd').click(function () {   
+        doc.fromHTML($('#app').html(), 15, 15, {
+            'width': 170,
+                'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });
+	</script>

@@ -121,12 +121,10 @@ class CrudController extends Controller
         //
     }
     public function toexport(){
+        $data = array('q1'=>'Combination of Drawings/Shareholder salary(i.e none paye income and PAYE)', 'q2'=>'YES');
+        $pdf = PDF::loadView('pdfView', compact('data'));
 
-        // $pdf = App::make('dompdf.wrapper');
-        // $pdf->loadHTML('<h1>Test</h1>');
-        // return $pdf->stream();
-        $pdf = PDF::loadView('crud/create');
-         return $pdf->download('create.pdf');
+        return $pdf->download('invoice.pdf');
     }
 
 }
