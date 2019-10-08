@@ -1,10 +1,18 @@
 <template>
     <div class="col-md-10">
-        <div class="container" style="margin-top: 20px;">
+        <div class="container container-contents">
             <div class="card">
-                <div class="card-header bg-primary text-white">CREATE</div>
-                <div class="card-body">
-                    <form @submit.prevent="submit">
+                <div class="card-header bg-primary text-white">
+                    EDIT
+                    <span class="float-right">
+                        <div class="btn-group">
+                            <a :href="/crud/" class="btn btn-light btn-sm">CANCEL</a>
+                        </div>
+                    </span>
+                </div>
+                <form @submit.prevent="update">
+                    <div class="card-body">
+                        
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="" v-model="fields.name">
@@ -95,15 +103,16 @@
                             <input type="text" class="form-control" id="cover_plus_extra_amt" placeholder="" name="cover_plus_extra_amt" v-model="fields.cover_plus_extra_amt">
                             <div v-if="errors && errors.cover_plus_extra_amt" class="text-danger">{{ errors.cover_plus_extra_amt[0] }}</div>
                         </div>
-                        <hr>
+
                         <div v-if="success" class="alert alert-success mt-3">
                             Message sent successfully!
                         </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary float-right">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                            
+                    </div>
+                    <div class="card-footer clearfix">
+                        <button type="submit" class="btn btn-primary float-right">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -120,22 +129,23 @@
             }
         },
         methods: {
-            submit() {
-                if (this.loaded) {
-                    this.loaded = false;
-                    this.success = false;
-                    this.errors = {};
-                    axios.post('/crud/store', this.fields).then(response => {
-                        this.fields = {};
-                        this.loaded = true;
-                        this.success = true;
-                    }).catch(error => {
-                        this.loaded = true;
-                        if (error.response.status === 422) {
-                            this.errors = error.response.data.errors || {};
-                        }
-                    });
-                }
+            update() {
+                alert('update')
+                // if (this.loaded) {
+                //     this.loaded = false;
+                //     this.success = false;
+                //     this.errors = {};
+                //     axios.post('/crud/store', this.fields).then(response => {
+                //         this.fields = {};
+                //         this.loaded = true;
+                //         this.success = true;
+                //     }).catch(error => {
+                //         this.loaded = true;
+                //         if (error.response.status === 422) {
+                //             this.errors = error.response.data.errors || {};
+                //         }
+                //     });
+                // }
             },
         },
     }

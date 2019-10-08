@@ -27,7 +27,7 @@ class CreateCrudsTable extends Migration
             $table->integer('take_out_money');
             $table->string('pay_freq');
             $table->string('acc_cover');
-            $table->string('cover_plus_extra_amt');
+            $table->integer('cover_plus_extra_amt');
             $table->timestamps();
         });
     }

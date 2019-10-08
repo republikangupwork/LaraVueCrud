@@ -7,13 +7,19 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>CRUD</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+	<style>
+		.container-contents {
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+	</style>
 </head>
 <body>
 	<div id="app">
 		<div class="row">
 	        {{-- <sidebar></sidebar> --}}
 	       	<div class="col-md-2">
-		        <div class="container-fluid" style="margin-top: 20px;">
+		        <div class="container" style="margin-top: 20px;">
 		            <h3>Simple Crud</h3>
 		            <hr>
 		            <div class="list-group">
@@ -28,7 +34,7 @@
 		        </div>
 		    </div>
 	        @yield('content')
-	        <button id="cmd" class="btn btn-default">Generate PDF</button>
+	        {{-- <button id="cmd" class="btn btn-default">Generate PDF</button> --}}
         </div>
   	</div>
 	

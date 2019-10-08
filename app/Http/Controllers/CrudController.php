@@ -69,7 +69,7 @@ class CrudController extends Controller
         $crud->take_out_money = $request['take_out_money'];
         $crud->pay_freq = $request['pay_freq'];
         $crud->acc_cover = $request['acc_cover'];
-        $crud->cover_plus_extra_amt = $request['name'];
+        $crud->cover_plus_extra_amt = $request['cover_plus_extra_amt'];
 
         $crud->save();
 
@@ -85,7 +85,6 @@ class CrudController extends Controller
     public function show($id, Crud $crud)
     {   
         $crud = Crud::find($id);
-        
         return view('crud.show', compact('crud'));
     }
 
@@ -98,8 +97,7 @@ class CrudController extends Controller
     public function edit($id, Crud $crud)
     {
         $crud = Crud::find($id);
-
-        return view('crud.show', compact('crud'));
+        return view('crud.edit', compact('crud'));
     }
 
     /**
@@ -124,15 +122,13 @@ class CrudController extends Controller
     {
         //
     }
-<<<<<<< HEAD
+
     public function toexport(){
         $data = array('q1'=>'Combination of Drawings/Shareholder salary(i.e none paye income and PAYE)', 'q2'=>'YES');
         $pdf = PDF::loadView('pdfView', compact('data'));
 
         return $pdf->download('invoice.pdf');
     }
-
-=======
 
     public function get_data_for_display()
     {   
@@ -145,5 +141,10 @@ class CrudController extends Controller
         $crud = Crud::find($id);
         $crud->delete();
     }
->>>>>>> ea52812c3ff1fffa3d10dc4b0dfb7acdd1bfa8da
+
+    public function get_single_data($id)
+    {
+        $crud = Crud::find($id);
+        return $crud;
+    }
 }

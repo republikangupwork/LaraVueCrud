@@ -29,6 +29,7 @@ Route::group(['prefix'=>'crud'], function () {
     Route::post('/update/', 'CrudController@update');
     Route::delete('/delete/{id}', 'CrudController@delete');
     Route::post('/get_data', 'CrudController@get_data_for_display');
+    Route::post('/get_single/{id}', 'CrudController@get_single_data');
 
 });
 

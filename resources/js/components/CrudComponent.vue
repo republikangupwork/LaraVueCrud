@@ -1,15 +1,31 @@
 <template>
     <div class="col-md-10">
-        <div class="container" style="margin-top: 20px;">
+        <div class="container container-contents">
             <div class="card">
                 <div class="card-header bg-primary text-white">DASHBOARD</div>
 
                 <div class="card-body">
                     <div class="loading" v-if="loading">
-                        No Data Available...
+                        Loading data...
                     </div>
-                    <table class="table table-striped table-bordered" v-if="data">
-                        <thead>
+                    <div class="nodata" v-if="nodata">
+                        <table class="table table-bordered">
+                            <thead class="bg-dark text-white">
+                                <tr class="text-center">
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">No data available...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="table table-bordered text-center" v-if="data">
+                        <thead class="bg-dark text-white">
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -21,9 +37,11 @@
                                 <td><p>{{ data.name }}</p></td>
                                 <td><p>{{ data.email }}</p></td>
                                 <td>
-                                    <a :href="'/crud/show/'+ data.id"" class="btn btn-success">Show</a>
-                                    <a :href="'/crud/edit/'+ data.id"" class="btn btn-primary">Edit</a>
-                                    <a href="" @click.prevent="deleteRow(data.id)" class="btn btn-danger">Delete</a>
+                                    <div class="btn-group">
+                                        <a :href="'/crud/show/'+ data.id"" class="btn btn-success">Show</a>
+                                        <a :href="'/crud/edit/'+ data.id"" class="btn btn-primary">Edit</a>
+                                        <a href="" @click.prevent="deleteRow(data.id)" class="btn btn-danger">Delete</a>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -44,6 +62,7 @@
                 loading: false,
                 data: null,
                 error: null,
+                nodata: false
             };
         },
         created() {
@@ -59,6 +78,9 @@
                         if (response['data'].length > 0) {
                             this.loading = false;
                             this.data = response['data'];
+                        } else {
+                            this.loading = false;
+                            this.nodata = true;
                         }
                     });
             },
