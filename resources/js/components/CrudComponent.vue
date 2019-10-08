@@ -27,6 +27,7 @@
                     <table class="table table-bordered text-center" v-if="data">
                         <thead class="bg-dark text-white">
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Action</th>
@@ -34,6 +35,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="data in data">
+                                <td><p>{{ data.id }}</p></td>
                                 <td><p>{{ data.name }}</p></td>
                                 <td><p>{{ data.email }}</p></td>
                                 <td>

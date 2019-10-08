@@ -96,7 +96,7 @@
                                 <div v-if="errors && errors.cover_plus_extra_amt" class="text-danger">{{ errors.cover_plus_extra_amt[0] }}</div>
                             </div>
                             <div v-if="success" class="alert alert-success mt-3">
-                                Message sent successfully!
+                                Form created successfully!
                             </div>
                             
                     </div>
