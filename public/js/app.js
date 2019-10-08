@@ -2393,6 +2393,14 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    exportRow: function exportRow() {
+      var id = this.id;
+      axios.post('/crud/export/' + id).then(function (response) {
+        window.location.href = '/crud/';
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }
 });
@@ -40001,9 +40009,16 @@ var render = function() {
                 [_vm._v("DELETE")]
               ),
               _vm._v(" "),
-              _c("button", { staticClass: "btn btn-success btn-sm" }, [
-                _vm._v("GENERATE")
-              ])
+              _vm.data
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success btn-sm",
+                      attrs: { href: "/crud/export/" + _vm.data.id }
+                    },
+                    [_vm._v("GENERATE PDF")]
+                  )
+                : _vm._e()
             ])
           ])
         ]),
@@ -52816,8 +52831,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\WORK\sidejob\laravelVue\LaraVueCrud\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\WORK\sidejob\laravelVue\LaraVueCrud\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\upwork\LaraVueCrud\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\upwork\LaraVueCrud\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

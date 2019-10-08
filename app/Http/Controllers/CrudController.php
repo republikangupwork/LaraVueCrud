@@ -87,6 +87,19 @@ class CrudController extends Controller
         $crud = Crud::find($id);
         return view('crud.show', compact('crud'));
     }
+    public function export($id, Crud $crud){  
+
+        $data = Crud::find($id);
+
+        $data['three_years_in_business'] = ($data['three_years_in_business'] == 1) ? 'Yes' : 'No';
+        $data['on_tool'] = ($data['on_tool'] == 1) ? 'Yes' : 'No'; 
+        $data['share_dir_on_tool'] = ($data['share_dir_on_tool'] == 1) ? 'Yes' : 'No'; 
+
+
+         $pdf = PDF::loadView('pdfView', compact('data'));
+         // return $pdf->download('create.pdf');
+          return $pdf->stream();
+    }
 
     /**
      * Show the form for editing the specified resource.

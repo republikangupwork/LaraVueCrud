@@ -8,7 +8,7 @@
                         <div class="btn-group">
                             <a v-if="data" :href="'/crud/edit/'+ data.id"" class="btn btn-info btn-sm text-white">EDIT</a>
                             <a href="" @click.prevent="deleteRow" class="btn btn-danger btn-sm text-white">DELETE</a>
-                            <button class="btn btn-success btn-sm">GENERATE</button>
+                            <a v-if="data" :href="'/crud/export/'+ data.id"" class="btn btn-success btn-sm">GENERATE PDF</a>
                         </div>
                     </span>
                 </div>
@@ -111,7 +111,18 @@
                     .catch(function (error) {
                         console.log(error);
                     });
+            },
+            exportRow() {
+                var id = this.id;
+                axios.post('/crud/export/'+ id)
+                    .then(function (response) {
+                        window.location.href = '/crud/';
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             }
+
         }
     }
 </script>
